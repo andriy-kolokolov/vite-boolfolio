@@ -16,7 +16,7 @@ export default defineComponent({
 
   <main>
     <div class="container">
-      <project-list/>
+      <router-view/>
     </div>
   </main>
 
