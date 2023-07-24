@@ -16,9 +16,9 @@
   </div>
 
   <nav>
-    <ul class="pagination">
+    <ul class="pagination m-auto">
       <li class="page-item" :class="{disabled: currentPage === 1}">
-        <a class="page-link" @click="currentPage--">Previous</a>
+        <a class="page-link" @click="prevPage">Previous</a>
       </li>
 
       <li v-for="page in nPages" :key="page" class="page-item" :class="{active: page === currentPage}">
@@ -26,7 +26,7 @@
       </li>
 
       <li class="page-item" :class="{disabled: currentPage === nPages}">
-        <a class="page-link" href="#" @click="currentPage++">Next</a>
+        <a class="page-link" href="#" @click="nextPage">Next</a>
       </li>
     </ul>
   </nav>
@@ -45,17 +45,27 @@ export default {
     }
   },
   methods: {
+    nextPage() {
+      this.currentPage++;
+      this.getProjects(this.currentPage);
+
+    },
+    prevPage() {
+      this.currentPage--;
+      this.getProjects(this.currentPage);
+    },
     getPage(page) {
       this.currentPage = page;
-      this.getProjects();
+      this.getProjects(page);
     },
-    getProjects() {
+    getProjects(page) {
       axios.get('http://127.0.0.1:8000/api/projects', {
-        page: this.currentPage,
+        params: {
+          page: page,
+        }
       })
           .then(response => (
-              this.arrProjects = response.data.data,
-                  this.nPages = response.data.last_page
+              this.arrProjects = response.data.data
           ));
     },
     getLanguages(arrLanguages) {

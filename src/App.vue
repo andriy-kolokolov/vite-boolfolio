@@ -14,7 +14,7 @@ export default defineComponent({
 
   <app-header/>
 
-  <main>
+  <main class="mt-4">
     <div class="container">
       <router-view/>
     </div>
