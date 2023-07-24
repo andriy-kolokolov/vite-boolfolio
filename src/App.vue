@@ -1,12 +1,11 @@
 <script>
 
 import {defineComponent} from "vue";
-import ProjectList from "./components/ProjectList.vue";
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 
 export default defineComponent({
-  components: {ProjectList, AppHeader, AppFooter}
+  components: {AppHeader, AppFooter}
 })
 </script>
 
@@ -25,5 +24,9 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
+@use 'scss/partials/variables' as *;
 
+main {
+  margin-bottom: calc($footer-height + 1.5rem);
+}
 </style>

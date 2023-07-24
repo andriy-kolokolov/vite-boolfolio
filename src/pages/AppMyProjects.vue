@@ -17,7 +17,7 @@
   </nav>
   <div class="card-container row g-3">
     <project-card
-        class="col-md-6 col-lg-4"
+        class="col-md-6 col-lg-4 col-xl-3"
         v-for="project in arrProjects"
         :key="project.id"
         :project="project"
@@ -41,6 +41,7 @@ export default {
       arrProjects: [],
       currentPage: 1,
       nPages: 0,
+      projectsPerPage: 4
     }
   },
   methods: {
@@ -61,18 +62,21 @@ export default {
       axios.get(this.store.backEndURL + 'api/projects', {
         params: {
           page: page,
+          per_page: this.projectsPerPage,
         }
       })
           .then(response => (
               this.arrProjects = response.data.data
           ));
     },
+
   }
   ,
   created() {
     axios.get(this.store.backEndURL + 'api/projects', {
       params: {
         page: this.currentPage,
+        per_page: this.projectsPerPage,
       }
     })
         .then(response => (

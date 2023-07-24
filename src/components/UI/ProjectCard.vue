@@ -2,10 +2,12 @@
   <div>
     <div class="card h-100"> <!-- Add 'h-100' class to make cards the same height -->
       <div class="card-body d-flex flex-column justify-content-between">
-        <div class="img-wrapper">
-          <img :src="getProjectImage(project)" alt="">
+        <div class="project-top">
+          <div class="img-wrapper">
+            <img :src="getProjectImage(project)" alt="">
+          </div>
+          <h5 class="card-title">{{ project.title }}</h5>
         </div>
-        <h5 class="card-title">{{ project.title }}</h5>
         <div class="project-details">
           <div><strong>Type: </strong>{{ project.type.name }}</div>
           <div><strong>Languages: </strong>{{ getLanguages(project.programming_languages) }}</div>
@@ -61,7 +63,6 @@ export default {
 
   img {
     object-fit: contain;
-    text-align: center;
     max-width: 100%;
     height: 100%;
   }
