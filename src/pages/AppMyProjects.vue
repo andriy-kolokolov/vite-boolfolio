@@ -15,15 +15,20 @@
       </li>
     </ul>
   </nav>
-  <div class="card-container row g-3">
-    <project-card
-        class="col-md-6 col-lg-4 col-xl-3"
-        v-for="project in arrProjects"
-        :key="project.id"
-        :project="project"
-    >
-    </project-card>
-  </div>
+
+  <transition>
+    <div v-if="!loading">
+      <div class="card-container row g-3">
+        <project-card
+            class="col-md-6 col-lg-4 col-xl-3"
+            v-for="project in arrProjects"
+            :key="project.id"
+            :project="project"
+        >
+        </project-card>
+      </div>
+    </div>
+  </transition>
 
 </template>
 
@@ -31,17 +36,19 @@
 import axios from "axios";
 import {store} from "../store.js";
 import ProjectCard from "../components/UI/ProjectCard.vue";
+import {Transition} from "vue";
 
 export default {
   name: "AppMyProjects",
-  components: {ProjectCard},
+  components: {ProjectCard, Transition},
   data() {
     return {
       store,
       arrProjects: [],
       currentPage: 1,
       nPages: 0,
-      projectsPerPage: 4
+      projectsPerPage: 4,
+      loading: false,
     }
   },
   methods: {
@@ -59,15 +66,21 @@ export default {
       this.getProjects(page);
     },
     getProjects(page) {
+      this.loading = true;
       axios.get(this.store.backEndURL + 'api/projects', {
         params: {
           page: page,
           per_page: this.projectsPerPage,
         }
       })
-          .then(response => (
-              this.arrProjects = response.data.data
-          ));
+          .then(response => {
+            this.arrProjects = response.data.data;
+            this.loading = false;
+          })
+          .catch(error => {
+            this.loading = false;
+            console.error(error);
+          });
     },
 
   }
@@ -79,14 +92,22 @@ export default {
         per_page: this.projectsPerPage,
       }
     })
-        .then(response => (
-            this.arrProjects = response.data.data,
-                this.nPages = response.data.last_page
-        ));
+        .then(response => {
+          this.arrProjects = response.data.data;
+          this.nPages = response.data.last_page;
+        });
   }
 }
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
