@@ -23,7 +23,7 @@
     <div v-if="!loading">
       <div class="card-container row g-3">
         <project-card
-            class="col-md-6 col-lg-4 col-xl-3"
+            class="col-md-6 col-lg-4"
             v-for="project in arrProjects"
             :key="project.id"
             :project="project"
@@ -50,7 +50,7 @@ export default {
       arrProjects: [],
       currentPage: 1,
       nPages: 0,
-      projectsPerPage: 4,
+      projectsPerPage: 3,
       loading: false,
     }
   },
@@ -126,7 +126,10 @@ export default {
 }
 
 .loading-container {
-  height: 50vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   .loading-txt {
     font-weight: bold;

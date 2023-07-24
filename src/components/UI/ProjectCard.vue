@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="card-wrapper">
     <div class="card h-100"> <!-- Add 'h-100' class to make cards the same height -->
       <div class="card-body d-flex flex-column justify-content-between">
         <div class="project-top">
           <div class="img-wrapper">
             <img :src="getProjectImage(project)" alt="">
           </div>
-          <h5 class="card-title">{{ project.title }}</h5>
+
         </div>
+        <h5 class="card-title">{{ project.title }}</h5>
         <div class="project-details">
           <div><strong>Type: </strong>{{ project.type.name }}</div>
           <div><strong>Languages: </strong>{{ getLanguages(project.programming_languages) }}</div>
@@ -58,14 +59,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'src/scss/partials/variables' as *;
 .img-wrapper {
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
+  padding: 10px;
 
   img {
-    object-fit: contain;
+    border-radius: $border-r-s;
+  }
+}
+
+.card-title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.project-details {
+  border: 1px solid lightgrey;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: $border-r-s;
+  padding: 10px;
+}
+
+.img-wrapper {
+  max-width: 100%;
+
+  img {
+    object-fit: cover;
     max-width: 100%;
-    height: 100%;
+    max-height: 300px;
   }
 }
 
