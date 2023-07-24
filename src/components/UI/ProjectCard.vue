@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       store,
+      loading: false,
     }
   },
   props: {

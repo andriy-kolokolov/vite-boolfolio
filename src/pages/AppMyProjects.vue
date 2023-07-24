@@ -15,8 +15,11 @@
       </li>
     </ul>
   </nav>
-
-  <transition>
+  <transition-group>
+    <div class="loading-container d-flex align-items-center justify-content-center" v-if="loading">
+      <div class="loading-txt">LOADING... </div>
+      <div id="loading"></div>
+    </div>
     <div v-if="!loading">
       <div class="card-container row g-3">
         <project-card
@@ -28,7 +31,7 @@
         </project-card>
       </div>
     </div>
-  </transition>
+  </transition-group>
 
 </template>
 
@@ -86,6 +89,7 @@ export default {
   }
   ,
   created() {
+    this.loading = true;
     axios.get(this.store.backEndURL + 'api/projects', {
       params: {
         page: this.currentPage,
@@ -95,19 +99,63 @@ export default {
         .then(response => {
           this.arrProjects = response.data.data;
           this.nPages = response.data.last_page;
+          this.loading = false;
+        })
+        .catch(error => {
+          this.loading = false;
+          console.error(error);
         });
-  }
+  },
 }
 </script>
 
-<style scoped>
-.v-enter-active,
+<style scoped lang="scss">
+@use 'src/scss/partials/variables' as *;
+
+.v-enter-active {
+  transition: opacity 0.8s ease;
+}
+
 .v-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.loading-container {
+  height: 50vh;
+
+  .loading-txt {
+    font-weight: bold;
+    font-size: 25px;
+    margin-right: 20px;
+    color: $my-color-primary;
+  }
+
+  #loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 7px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: $my-color-primary;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @-webkit-keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>
