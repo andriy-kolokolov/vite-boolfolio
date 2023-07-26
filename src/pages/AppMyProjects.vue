@@ -1,5 +1,5 @@
 <template>
-  <h2>Projects List</h2>
+  <div class="fw-bold fs-2">Projects List</div>
   <nav>
     <ul class="pagination mt-3">
       <li class="page-item" :class="{disabled: currentPage === 1}">
@@ -21,9 +21,9 @@
       <div id="loading"></div>
     </div>
     <div v-if="!loading">
-      <div class="card-container row g-3">
+      <div class="card-container row g-3 justify-content-center">
         <project-card
-            class="col-md-6 col-lg-4"
+            class="col-md-8 col-lg-6 col-xxl-4"
             v-for="project in arrProjects"
             :key="project.id"
             :project="project"

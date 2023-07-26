@@ -1,19 +1,19 @@
 <template>
-  <div class="card-wrapper">
+  <div class="card-wrapper shadow">
     <div class="card h-100"> <!-- Add 'h-100' class to make cards the same height -->
       <div class="card-body d-flex flex-column justify-content-between">
         <div class="project-top">
           <div class="img-wrapper">
             <img :src="getProjectImage(project)" alt="">
+            <h5 class="card-title">{{ project.title }}</h5>
           </div>
-
         </div>
-        <h5 class="card-title">{{ project.title }}</h5>
+
         <div class="project-details">
           <div><strong>Type: </strong>{{ project.type.name }}</div>
           <div><strong>Languages: </strong>{{ getLanguages(project.programming_languages) }}</div>
           <div><strong>Technologies: </strong>{{ getTechnologies(project.technologies) }}</div>
-          <div><strong>Description: </strong>{{ project.description }}</div>
+<!--          <div><strong>Description: </strong>{{ project.description }}</div>-->
           <div><strong>Project url: </strong><a :href="project.project_url">{{ project.project_url }}</a></div>
         </div>
       </div>
@@ -60,12 +60,9 @@ export default {
 
 <style scoped lang="scss">
 @use 'src/scss/partials/variables' as *;
-.img-wrapper {
-  padding: 10px;
 
-  img {
-    border-radius: $border-r-s;
-  }
+.card-body {
+  background-color: lightgrey;
 }
 
 .card-title {
@@ -81,12 +78,14 @@ export default {
 }
 
 .img-wrapper {
+  padding: 10px;
   max-width: 100%;
+  aspect-ratio: 16 / 9;
 
   img {
     object-fit: cover;
-    max-width: 100%;
-    max-height: 300px;
+    width: 100%;
+    border-radius: $border-r-s;
   }
 }
 
