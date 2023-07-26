@@ -35,7 +35,6 @@ export default {
 
   .router-link-active {
     color: #0079fd;
-    scale: 1.1;
     font-weight: bold;
   }
 }
