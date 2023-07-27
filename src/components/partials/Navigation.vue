@@ -1,26 +1,19 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <!-- Use router-link instead of anchor tag -->
-            <router-link class="nav-link" :to="{ path: '/' }" exact>Home</router-link>
-          </li>
-          <li class="nav-item">
-            <!-- Use router-link instead of anchor tag -->
-            <router-link class="nav-link" :to="{ path: '/projects' }">Projects</router-link>
-          </li>
-          <li class="nav-item">
-            <!-- Use router-link instead of anchor tag -->
-            <router-link class="nav-link" :to="{ path: '/contact-me' }">Contact me</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <nav class="navigation container-fluid">
+    <ul class="my-navbar">
+      <li class="nav-item">
+        <!-- Use router-link instead of anchor tag -->
+        <router-link class="nav-link" :to="{ path: '/home' }" exact>Home</router-link>
+      </li>
+      <li class="nav-item">
+        <!-- Use router-link instead of anchor tag -->
+        <router-link class="nav-link" :to="{ path: '/projects' }">Projects</router-link>
+      </li>
+      <li class="nav-item">
+        <!-- Use router-link instead of anchor tag -->
+        <router-link class="nav-link" :to="{ path: '/contact-me' }">Contact me</router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -31,12 +24,44 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'src/scss/partials/my-variables' as *;
 
-.nav-item {
+$border-nav-link: 5px;
 
-  .router-link-active {
-    color: #0079fd;
-    font-weight: bold;
+.navigation {
+  height: 100%;
+
+  .my-navbar {
+    height: 100%;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 0;
+
+    .nav-item {
+      height: 100%;
+
+      .nav-link {
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        border-bottom: 5px solid transparent;
+
+        &:hover {
+          border-bottom: $border-nav-link solid $my-color-primary;
+        }
+      }
+
+      .nav-link.router-link-active {
+        color: $my-color-primary;
+        border-bottom: $border-nav-link solid $my-color-primary;
+      }
+    }
+
+
   }
 }
+
 </style>
