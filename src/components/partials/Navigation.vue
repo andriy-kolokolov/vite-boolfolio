@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .nav-item {
 
   .router-link-active {

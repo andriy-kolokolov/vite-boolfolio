@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use 'src/scss/partials/variables' as *;
+@use '../scss/partials/my-variables' as *;
 
 .v-enter-active {
   transition: opacity 0.8s ease;

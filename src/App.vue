@@ -13,7 +13,7 @@ export default defineComponent({
 
   <app-header/>
 
-  <main class="mt-1">
+  <main>
     <div class="container-fluid">
       <router-view/>
     </div>

@@ -21,18 +21,31 @@ $my-box-shadow: 0 0 5px 0 rgba(0,0,0,0.20);
 $my-color-violet: #ff2d55;
 $my-color-orange-2: #ff3b30;
 $my-color-orange: #ff9500;
-$my-color-green: #4cd964;
+$my-color-green: #7184ed;
 
 /*    light theme    */
-$my-color-primary: #007aff;
+$my-color-primary: #9999ff;
+$my-color-secondary: #6b7db3;
+$my-color-tertiary: #ccd9ff;
+
 $my-bg-color-primary: #ffffff;
-$my-bg-color-secondary: #eceaee;
+$my-bg-color-secondary: #e6ecff;
+
 $my-txt-color: #191919;
 
 /*    dark theme    */
 .dark-theme {
-  $my-color-primary: #007aff;
+  $my-color-primary: #bb99ff;
   $my-bg-color-primary: #252526;
   $my-bg-color-secondary: #3e3e42;
   $my-txt-color: #eeeeee;
 }
+
+/*****************************************
+    ANIMATIONS AND TRANSITIONS
+*****************************************/
+$my-link-transition-s: .3s;
+$my-link-transition-m: .6s;
+$my-link-transition-l: .9s;
+
+
