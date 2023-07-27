@@ -65,12 +65,12 @@ export default {
 
 .card {
   border-width: 0;
-  border-radius: $border-r-s;
+  border-radius: $border-r-m;
   box-shadow: 0 0 11px 1px rgba(0,0,0,0.25);
 }
 
 .card-body {
-  border-radius: $border-r-s;
+  border-radius: $border-r-m;
   background-color: $my-bg-color-secondary;
 }
 
@@ -96,6 +96,17 @@ export default {
     object-fit: cover;
     width: 100%;
     border-radius: $border-r-s;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.20);
+    transition: .3s;
+    &:hover {
+      scale: 1.03;
+    }
+
+    @media (max-width:768px) {
+      &:hover {
+        scale: 1.0;
+      }
+    }
   }
 }
 
