@@ -65,12 +65,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../scss/partials/my-variables' as *;
+@use 'src/scss/partials/my-variables' as *;
 
 .card {
   border-width: 0;
   border-radius: $border-r-m;
-  box-shadow: 0 0 11px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: $my-box-shadow-l;
 
   .card-body {
     padding: 30px;
@@ -87,7 +87,8 @@ export default {
           object-fit: cover;
           width: 100%;
           border-radius: $border-r-s;
-          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.20);
+          border: 1px solid lightgrey;
+          box-shadow: $my-box-shadow-m;
           transition: .3s;
 
           &:hover {
@@ -103,17 +104,31 @@ export default {
       }
 
       .card-title {
-        margin-top: 20px;
-        margin-bottom: 20px;
+        padding: 10px;
+        background-color: $my-bg-color-primary;
+        border-radius: $border-r-s;
+        box-shadow: $my-box-shadow-s;
+        color: $my-txt-color;
+        font-family: 'Scandia', sans-serif;
+        font-weight: bold;
+        margin-top: 25px;
+        margin-bottom: 25px;
       }
     }
 
     .project-bot-details {
+      color: $my-txt-color;
+      font-family: 'Scandia', sans-serif;
       padding: 15px 20px;
       border: 1px solid lightgrey;
       background-color: $my-bg-color-primary;
       border-radius: $border-r-s;
-      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.20);
+      box-shadow: $my-box-shadow-s;
+      transition: $my-link-transition-s;
+
+      &:hover {
+        scale: 1.03;
+      }
     }
 
   }

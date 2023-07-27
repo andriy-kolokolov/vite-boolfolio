@@ -2,15 +2,12 @@
   <nav class="navigation container-fluid">
     <ul class="my-navbar">
       <li class="nav-item">
-        <!-- Use router-link instead of anchor tag -->
         <router-link class="nav-link" :to="{ path: '/home' }" exact>Home</router-link>
       </li>
       <li class="nav-item">
-        <!-- Use router-link instead of anchor tag -->
         <router-link class="nav-link" :to="{ path: '/projects' }">Projects</router-link>
       </li>
       <li class="nav-item">
-        <!-- Use router-link instead of anchor tag -->
         <router-link class="nav-link" :to="{ path: '/contact-me' }">Contact me</router-link>
       </li>
     </ul>
@@ -50,7 +47,8 @@ $border-nav-link: 5px;
         border-bottom: 5px solid transparent;
 
         &:hover {
-          border-bottom: $border-nav-link solid $my-color-primary;
+          color: $my-color-primary;
+          //border-bottom: $border-nav-link solid $my-color-primary;
         }
       }
 
