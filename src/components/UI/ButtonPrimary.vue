@@ -27,7 +27,7 @@ export default {
   border-width: 0;
   padding: 10px 30px;
   border-radius: $border-r-l;
-  background-color: $my-color-green;
+  background-color: $my-color-primary;
   transition: $my-link-transition-s;
 
   &:hover {

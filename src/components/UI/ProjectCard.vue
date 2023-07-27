@@ -21,7 +21,6 @@
           <div><strong>Type: </strong>{{ project.type.name }}</div>
           <div><strong>Languages: </strong>{{ getLanguages(project.programming_languages) }}</div>
           <div><strong>Technologies: </strong>{{ getTechnologies(project.technologies) }}</div>
-          <!--          <div><strong>Description: </strong>{{ project.description }}</div>-->
           <div class="d-flex mt-4 mb-2 justify-content-center">
             <button-primary :link="project.project_url">
               SHOW ON GITHUB
@@ -66,14 +65,14 @@ export default {
     },
     getProjectImage(project) {
       return project.image === null ?
-          this.store.backEndStorageURL + 'uploads/no-img.jpg' :
+          this.store.backEndStorageURL + 'uploads/no-img.png' :
           this.store.backEndStorageURL + project.image;
     },
   },
   mounted() {
     new Popover(document.body, {
       selector: "[data-bs-toggle='popover']",
-      trigger: "[data-bs-trigger='focus']"
+      trigger: "[data-bs-trigger='focus']",
     })
   }
 
@@ -82,6 +81,7 @@ export default {
 
 <style scoped lang="scss">
 @use 'src/scss/partials/my-variables' as *;
+
 
 .card {
   border-width: 0;
@@ -102,6 +102,7 @@ export default {
         img {
           object-fit: cover;
           width: 100%;
+          aspect-ratio: 16 / 9;
           border-radius: $border-r-s;
           border: 1px solid lightgrey;
           box-shadow: $my-box-shadow-m;
@@ -167,7 +168,6 @@ export default {
         //scale: 1.03;
       }
     }
-
   }
 }
 
