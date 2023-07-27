@@ -1,5 +1,6 @@
 @use 'src/scss/partials/my-variables' as *;
-@use 'partials/footer' as *;
+@use 'src/scss/components/header' as *;
+@use 'src/scss/components/footer' as *;
 @use 'partials/fonts' as *;
 @use 'partials/badge-colors' as *;
 

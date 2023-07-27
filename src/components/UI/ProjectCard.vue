@@ -3,7 +3,7 @@
     <div class="card h-100"> <!-- Add 'h-100' class to make cards the same height -->
       <div class="card-body d-flex flex-column justify-content-between">
         <div class="project-top">
-          <div class="img-wrapper">
+          <div class="img-wrapper" @click="projectModalVisible = true">
             <img :src="getProjectImage(project)" alt="">
           </div>
           <div class="d-flex justify-content-between card-title">
@@ -31,21 +31,33 @@
         </div>
       </div>
     </div>
+
+    <!--    TODO EDIT IMAGE PATH AFTER AXIOS REQUEST, REMOVE getProjectImage METHOD     -->
+    <Modal
+        v-model:show="projectModalVisible"
+        :project="project"
+        :projectImage="getProjectImage(project)"
+    />
+
   </div>
+
 </template>
 
 <script>
+import {Transition} from "vue";
 import {store} from "../../store.js";
 import ButtonPrimary from "./ButtonPrimary.vue";
 import {Popover} from 'bootstrap';
+import Modal from "./ProjectModal.vue";
 
 export default {
   name: "ProjectCard",
-  components: {ButtonPrimary},
+  components: {Modal, ButtonPrimary, Transition},
   data() {
     return {
       store,
       loading: false,
+      projectModalVisible: false,
     }
   },
   props: {
@@ -79,7 +91,7 @@ export default {
     new Popover(document.body, {
       selector: "[data-bs-toggle='popover']",
       trigger: "[data-bs-trigger='focus']",
-    })
+    });
   }
 
 }

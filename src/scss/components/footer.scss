@@ -1,4 +1,4 @@
-@use "my-variables" as *;
+@use "src/scss/partials/my-variables" as *;
 
 .admin-footer {
   height: $footer-height;
