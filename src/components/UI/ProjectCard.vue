@@ -6,7 +6,15 @@
           <div class="img-wrapper">
             <img :src="getProjectImage(project)" alt="">
           </div>
-          <h5 class="card-title">{{ project.title }}</h5>
+          <div class="d-flex justify-content-between card-title">
+            <h5 class="title">{{ project.title }}</h5>
+            <a tabindex="0" class="project-info"
+               role="button"
+               data-bs-toggle="popover"
+               data-bs-trigger="focus"
+               :data-bs-title="project.title"
+               :data-bs-content="project.description"><i class="bi bi-info-circle"></i></a>
+          </div>
         </div>
 
         <div class="project-bot-details h-100 row g-2">
@@ -28,6 +36,7 @@
 <script>
 import {store} from "../../store.js";
 import ButtonPrimary from "./ButtonPrimary.vue";
+import {Popover} from 'bootstrap';
 
 export default {
   name: "ProjectCard",
@@ -60,7 +69,14 @@ export default {
           this.store.backEndStorageURL + 'uploads/no-img.jpg' :
           this.store.backEndStorageURL + project.image;
     },
+  },
+  mounted() {
+    new Popover(document.body, {
+      selector: "[data-bs-toggle='popover']",
+      trigger: "[data-bs-trigger='focus']"
+    })
   }
+
 }
 </script>
 
@@ -109,10 +125,31 @@ export default {
         border-radius: $border-r-s;
         box-shadow: $my-box-shadow-s;
         color: $my-txt-color;
-        font-family: 'Scandia', sans-serif;
-        font-weight: bold;
         margin-top: 25px;
         margin-bottom: 25px;
+
+        .title {
+          margin: 0;
+          font-family: 'Scandia', sans-serif;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+        }
+
+        .project-info {
+          color: $my-txt-color;
+          font-size: 22px;
+          transition: $my-link-transition-s;
+
+          &:hover {
+            color: $my-color-primary;
+          }
+
+          &:focus {
+            scale: 1.2;
+            color: $my-color-primary;
+          }
+        }
       }
     }
 
@@ -127,7 +164,7 @@ export default {
       transition: $my-link-transition-s;
 
       &:hover {
-        scale: 1.03;
+        //scale: 1.03;
       }
     }
 
