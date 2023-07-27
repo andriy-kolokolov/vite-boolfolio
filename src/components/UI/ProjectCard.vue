@@ -17,12 +17,14 @@
           </div>
         </div>
 
-        <div class="project-bot-details h-100 row g-2">
-          <div><strong>Type: </strong>{{ project.type.name }}</div>
-          <div><strong>Languages: </strong>{{ getLanguages(project.programming_languages) }}</div>
-          <div><strong>Technologies: </strong>{{ getTechnologies(project.technologies) }}</div>
-          <div class="d-flex mt-4 mb-2 justify-content-center">
-            <button-primary :link="project.project_url">
+        <div class="project-bot-details">
+          <div><span class="detail-title">Type: </span>{{ project.type.name }}</div>
+          <div><span class="detail-title">Languages: </span><span
+              v-html="getLanguages(project.programming_languages)"></span></div>
+          <div><span class="detail-title">Technologies: </span><span
+              v-html="getTechnologies(project.technologies)"></span></div>
+          <div class="d-flex">
+            <button-primary class="w-100" :link="project.project_url">
               SHOW ON GITHUB
             </button-primary>
           </div>
@@ -55,12 +57,16 @@ export default {
   methods: {
     getLanguages(arrLanguages) {
       let res = '';
-      arrLanguages.forEach(language => res += language.name + ' ');
+      arrLanguages.forEach(language => {
+        res += `<span class="badge-${language.name.toLowerCase().replace(/\./g, '')}">${language.name}</span>`;
+      });
       return res;
     },
     getTechnologies(arrTechnologies) {
       let res = '';
-      arrTechnologies.forEach(technology => res += technology.name + ' ');
+      arrTechnologies.forEach(technology => {
+        res += `<span class="badge-${technology.name.toLowerCase().replace(/\./g, '')}">${technology.name}</span>`;
+      });
       return res;
     },
     getProjectImage(project) {
@@ -163,6 +169,10 @@ export default {
       border-radius: $border-r-s;
       box-shadow: $my-box-shadow-s;
       transition: $my-link-transition-s;
+
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
 
       &:hover {
         //scale: 1.03;

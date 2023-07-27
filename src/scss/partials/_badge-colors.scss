@@ -1,0 +1,90 @@
+@use 'my-variables' as *;
+
+$badge-fs: 13px;
+
+[class^="badge-"] {
+  opacity: .85;
+  font-size: $badge-fs;
+  color: $my-txt-color-inverted; // default txt badge color
+  background-color: #cccccc; // default bg badge color
+  padding: 2px 6px;
+  margin-inline: 2px;
+  border-radius: 10px;
+  transition: $my-link-transition-s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/*****************************************
+    LANGUAGE BADGES
+*****************************************/
+.badge-js {
+  background-color: yellow;
+  color: $my-txt-color;
+}
+
+.badge-html {
+  background-color: #e76228;
+}
+
+.badge-css {
+  background-color: #c46293;
+}
+
+.badge-scss {
+  background-color: #c46293;
+}
+
+.badge-sass {
+  background-color: #c46293;
+}
+
+.badge-php {
+  background-color: #7276ad;
+}
+
+.badge-java {
+  background-color: #f6961d;
+}
+
+.badge-vue {
+  background-color: #42b883;
+}
+
+/*****************************************
+    TECHNOLOGY BADGES
+*****************************************/
+.badge-vuejs {
+  background-color: #42b883;
+}
+
+.badge-bootstrap {
+  background-color: #6e2df2;
+}
+
+.badge-laravel {
+  background-color: #ee3d2f;
+}
+
+.badge-hibernate {
+  background-color: #b5a874;
+}
+
+.badge-mysql {
+  background-color: #2b90dc;
+}
+
+.badge-maven {
+  background-color: #923e7c;
+}
+
+.badge-spring {
+  background-color: #71b444;
+}
+
+.badge-jdbc {
+  background-color: #2646a5;
+}

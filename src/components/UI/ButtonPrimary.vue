@@ -31,7 +31,7 @@ export default {
   transition: $my-link-transition-s;
 
   &:hover {
-    //scale: 1.04;
+    scale: 1.02;
   }
 
   &:active {
