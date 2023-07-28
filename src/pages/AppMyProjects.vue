@@ -1,7 +1,7 @@
 <template>
-<!--  <div class="fw-bold fs-2">Projects List</div>-->
-  <nav>
-    <ul class="pagination mt-3">
+  <!--  <div class="fw-bold fs-2">Projects List</div>-->
+  <nav class="d-flex justify-content-between mt-4 mb-4">
+    <ul class="pagination mb-0">
       <li class="page-item" :class="{disabled: currentPage === 1}">
         <a class="page-link" @click="prevPage">Previous</a>
       </li>
@@ -14,31 +14,41 @@
         <a class="page-link" @click="nextPage">Next</a>
       </li>
     </ul>
+    <div class="my-input-group">
+      <input type="text" class="form-control" placeholder="Search..." aria-label="search"
+             aria-describedby="btn-search">
+      <button class="btn my-search-btn" type="button" id="btn-search">
+        <i class="fa-solid fa-magnifying-glass"/>
+      </button>
+    </div>
   </nav>
-  <transition-group>
-    <div class="loading-container d-flex align-items-center justify-content-center" v-if="loading">
-      <div class="loading-txt">LOADING... </div>
-      <div id="loading"></div>
-    </div>
-    <div v-if="!loading">
-      <div class="card-container row g-4 justify-content-center">
-        <project-card
-            class="col-lg-6 col-xxl-4"
-            v-for="project in arrProjects"
-            :key="project.id"
-            :project="project"
-        >
-        </project-card>
+
+  <div class="projects-result-set">
+    <transition-group>
+      <div class="loading-container d-flex align-items-center justify-content-center" v-if="loading">
+        <div class="loading-txt">LOADING...</div>
+        <div id="loading"></div>
       </div>
-    </div>
-  </transition-group>
+      <div v-if="!loading">
+        <div class="card-container row g-4 justify-content-center">
+          <project-card
+              class="col-lg-6 col-xxl-4"
+              v-for="project in arrProjects"
+              :key="project.id"
+              :project="project"
+          >
+          </project-card>
+        </div>
+      </div>
+    </transition-group>
+  </div>
 
 </template>
 
 <script>
 import axios from "axios";
 import {store} from "../store.js";
-import ProjectCard from "../components/UI/ProjectCard.vue";
+import {ProjectCard} from "../components/UI/index.js";
 import {Transition} from "vue";
 
 export default {
@@ -85,7 +95,6 @@ export default {
             console.error(error);
           });
     },
-
   }
   ,
   created() {
@@ -123,6 +132,34 @@ export default {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.my-input-group {
+  display: flex;
+  width: 30%;
+
+  .my-search-btn {
+    background-color: transparent;
+    border: transparent;
+
+    i {
+      transition: $my-link-transition-s;
+    }
+
+    &:hover {
+      i {
+        scale: 1.2;
+        color: $my-color-primary;
+      }
+    }
+
+    &:active {;
+
+      i {
+        scale: .9;
+      }
+    }
+  }
 }
 
 .loading-container {

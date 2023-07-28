@@ -33,7 +33,7 @@
     </div>
 
     <!--    TODO EDIT IMAGE PATH AFTER AXIOS REQUEST, REMOVE getProjectImage METHOD     -->
-    <Modal
+    <project-modal
         v-model:show="projectModalVisible"
         :project="project"
         :projectImage="getProjectImage(project)"
@@ -46,13 +46,14 @@
 <script>
 import {Transition} from "vue";
 import {store} from "../../store.js";
-import ButtonPrimary from "./ButtonPrimary.vue";
 import {Popover} from 'bootstrap';
-import Modal from "./ProjectModal.vue";
+import ButtonPrimary from "./ButtonPrimary.vue";
+import ProjectModal from "./ProjectModal.vue";
+
 
 export default {
   name: "ProjectCard",
-  components: {Modal, ButtonPrimary, Transition},
+  components: {ProjectModal, ButtonPrimary, Transition},
   data() {
     return {
       store,
@@ -118,6 +119,7 @@ export default {
         aspect-ratio: 16 / 9;
 
         img {
+          cursor: pointer;
           object-fit: cover;
           width: 100%;
           aspect-ratio: 16 / 9;
