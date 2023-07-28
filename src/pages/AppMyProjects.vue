@@ -15,10 +15,10 @@
       </li>
     </ul>
     <div class="my-input-group">
-      <input type="text" class="form-control" placeholder="Search..." aria-label="search"
-             aria-describedby="btn-search">
+      <input type="text" class="form-control" placeholder="Search by project..." aria-label="search"
+             aria-describedby="btn-search" @keyup.enter="searchProject" v-model="searchQuery">
       <button class="btn my-search-btn" type="button" id="btn-search">
-        <i class="fa-solid fa-magnifying-glass"/>
+        <i class="fa-solid fa-magnifying-glass" @click="searchProject"/>
       </button>
     </div>
   </nav>
@@ -62,9 +62,31 @@ export default {
       nPages: 0,
       projectsPerPage: 3,
       loading: false,
+      searchQuery: '',
     }
   },
   methods: {
+    searchProject() {
+      this.loading = true;
+      this.arrProjects = [];
+      axios.get(this.store.backEndURL + 'api/projects/search', {
+        params: {
+          searchQuery: this.searchQuery,
+          per_page: this.projectsPerPage,
+        }
+      })
+          .then(response => {
+            this.searchQuery = '';
+            this.nPages = response.data.last_page;
+            this.arrProjects = response.data.data;
+            this.loading = false;
+          })
+          .catch(error => {
+            this.searchQuery = '';
+            this.loading = false;
+            console.error(error);
+          });
+    },
     nextPage() {
       this.currentPage++;
       this.getProjects(this.currentPage);
