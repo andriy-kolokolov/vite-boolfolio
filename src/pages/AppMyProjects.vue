@@ -1,20 +1,35 @@
 <template>
   <!--  <div class="fw-bold fs-2">Projects List</div>-->
-  <nav class="d-flex justify-content-between mt-4 mb-4">
-    <ul class="pagination mb-0">
-      <li class="page-item" :class="{disabled: currentPage === 1}">
-        <a class="page-link" @click="prevPage">Previous</a>
-      </li>
+  <nav class="row mt-4 mb-4"
+       :class="{'justify-content-center': searching, 'justify-content-between': !searching}">
+    <div :class="{'d-none': searching}" class="col d-flex justify-content-start">
+      <div v-if="!searching" class="row">
+        <ul class="col d-flex align-items-center pagination mb-0">
+          <li class="page-item" :class="{disabled: currentPage === 1}">
+            <a class="page-link" @click="prevPage">Previous</a>
+          </li>
 
-      <li v-for="page in nPages" :key="page" class="page-item" :class="{active: page === currentPage}">
-        <span class="page-link" @click="getPage(page)">{{ page }}</span>
-      </li>
+          <li v-for="page in nPages" :key="page" class="page-item" :class="{active: page === currentPage}">
+            <span class="page-link" @click="getPage(page)">{{ page }}</span>
+          </li>
 
-      <li class="page-item" :class="{disabled: currentPage === nPages}">
-        <a class="page-link" @click="nextPage">Next</a>
-      </li>
-    </ul>
-    <div class="my-input-group">
+          <li class="page-item" :class="{disabled: currentPage === nPages}">
+            <a class="page-link" @click="nextPage">Next</a>
+          </li>
+        </ul>
+
+        <div class="col p-0 d-flex justify-content-center align-items-center refresh-result-set">
+          <i @click="getProjects(currentPage)" class="fa-solid fa-rotate"></i>
+        </div>
+      </div>
+    </div>
+
+    <div :class="{'col-5': searching === true, 'col-4': !searching}"
+         class=" my-input-group d-flex align-items-center">
+      <div v-if="searching" class="back-to-result-set" @click="getProjects(currentPage), searching = false">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+        <div class="d-flex align-items-center ">Back</div>
+      </div>
       <input type="text" class="form-control" placeholder="Search by project..." aria-label="search"
              aria-describedby="btn-search" @keyup.enter="searchProject" v-model="searchQuery">
       <button class="btn my-search-btn" type="button" id="btn-search">
@@ -63,22 +78,22 @@ export default {
       projectsPerPage: 3,
       loading: false,
       searchQuery: '',
+      searching: false,
     }
   },
   methods: {
     searchProject() {
+      this.searching = true
       this.loading = true;
       this.arrProjects = [];
       axios.get(this.store.backEndURL + 'api/projects/search', {
         params: {
           searchQuery: this.searchQuery,
-          per_page: this.projectsPerPage,
         }
       })
           .then(response => {
             this.searchQuery = '';
-            this.nPages = response.data.last_page;
-            this.arrProjects = response.data.data;
+            this.arrProjects = response.data;
             this.loading = false;
           })
           .catch(error => {
@@ -90,7 +105,6 @@ export default {
     nextPage() {
       this.currentPage++;
       this.getProjects(this.currentPage);
-
     },
     prevPage() {
       this.currentPage--;
@@ -156,9 +170,51 @@ export default {
   opacity: 0;
 }
 
+.back-to-result-set {
+  transition: $my-link-transition-s;
+  cursor: pointer;
+  display: flex;
+  margin-right: 10px;
+
+  i {
+    padding: 5px;
+  }
+  &:hover {
+    color: $my-color-primary;
+    scale: 1.1;
+  }
+
+}
+
+.refresh-result-set {
+  i {
+    padding: 15px;
+    scale: 1.1;
+    cursor: pointer;
+    font-size: 20px;
+    transition: $my-link-transition-s;
+
+    &:hover {
+      scale: 1.3;
+      color: $my-color-primary;
+      transform: rotate(90deg);
+    }
+
+    &:active {
+      transform: rotate(300deg);
+    }
+  }
+}
+
 .my-input-group {
   display: flex;
-  width: 30%;
+
+  .form-control:focus {
+    //border-color: $my-color-primary;
+    border-color: rgb(112, 131, 235, 0.40);
+    opacity: .7;
+    box-shadow: 0 0 5px 0.25rem rgb(112, 131, 235, 0.30);
+  }
 
   .my-search-btn {
     background-color: transparent;
