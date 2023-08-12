@@ -14,7 +14,7 @@ export default defineComponent({
   <app-header/>
 
   <main>
-    <div class="container-fluid">
+    <div class="container">
       <router-view/>
     </div>
   </main>
